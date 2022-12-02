@@ -125,7 +125,8 @@ public:
             i++;
         }
     }
-    
+
+
     ~Spouse() {
         Child *currChild = childHead;
         while (currChild) {

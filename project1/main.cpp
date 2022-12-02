@@ -99,30 +99,16 @@ public:
         }
         
     }
-    
+
     void printChildrenDetails() {
         Child *temp = childHead;
-        int i = 1;
+        int i = num_children;
         while(temp) {
-            cout << i;
-            switch (i) {
-                case 1:
-                    cout << "st ";
-                    break;
-                case 2:
-                    cout << "nd ";
-                    break;
-                case 3:
-                    cout << "rd ";
-                default:
-                    cout << "th ";
-            }
-
-            cout << "child's name is " << temp->getName()
-            << "and this child's age is " << temp->getAge() << endl;
+            cout <<"Child " << i <<" name is " << temp->getName()
+            << " and this child's age is " << temp->getAge() << endl;
             
             temp = temp->nextChild;
-            i++;
+            i--;
         }
     }
     
@@ -156,7 +142,7 @@ struct Employee {
     ~Employee() {
         delete spouseLink;
     }
-    
+
     void printChildrenDetails()
     {
         spouseLink->printChildrenDetails();
@@ -214,8 +200,8 @@ private:
 int main(){
     List list1;
     list1.insertEmployeeAtFront("Tim","designation1","Example1@gmail.com", 210045, 23 );
-    //    list1.insertEmployeeAtFront("Kruz","designation2","Example2@gmail.com", 210046, 25 );
-    //    list1.insertEmployeeAtFront("Kevin","designation3","Example3@gmail.com", 210047, 27 );
+    list1.insertEmployeeAtFront("Kruz","designation2","Example2@gmail.com", 210046, 25 );
+    list1.insertEmployeeAtFront("Kevin","designation3","Example3@gmail.com", 210047, 27 );
     
     list1.printAllEmpChildDetails();
 

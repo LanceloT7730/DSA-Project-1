@@ -15,11 +15,11 @@ public:
     
     int getAge() {
         return age;
-    };
+    }
     
     void setAge(int &age) {
         this->age = age;
-    };
+    }
     
     string getName() {
         return name;
@@ -36,25 +36,26 @@ class Spouse {
     int num_children;
     
     Child *childHead;
-    Child *newChild = new Child;
+    //Child *newChild = new Child;
     
     void insertChildAtFront(int age, string name) {
+//i=0; i<num_children
+Child *newChild = new Child;
         newChild->setAge(age);
         newChild->setName(name);
-        
         newChild->nextChild = childHead;
         childHead = newChild;
     }
     
 public:
     Spouse() {
+
         cout << "Enter the number of childs" << endl;
         cin >> num_children;
         if (num_children <= 0) num_children = 0;
         else {
             childHead = nullptr;
             childrenDetails(num_children);
-            printChildrenDetails();
         }
     }
     int getAge() {
@@ -116,10 +117,12 @@ public:
                 default:
                     cout << "th ";
             }
+
             cout << "child's name is " << temp->getName()
             << "and this child's age is " << temp->getAge() << endl;
             
             temp = temp->nextChild;
+            i++;
         }
     }
     
@@ -154,7 +157,10 @@ struct Employee {
         delete spouseLink;
     }
     
-    void printChildrenDetails();
+    void printChildrenDetails()
+    {
+        spouseLink->printChildrenDetails();
+    }
     
 private:
     Spouse *spouseLink;
@@ -193,7 +199,12 @@ struct List {
     }
     
     void printAllEmpChildDetails() {
-        
+        Employee *curr = head;
+        while(curr)
+        {
+            curr->printChildrenDetails();
+            curr = curr->nextEmployee;
+        }
     }
     
 private:

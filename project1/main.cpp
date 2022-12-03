@@ -138,8 +138,6 @@ struct Employee {
         delete spouseLink;
     }
 
-
-
     void printChildrenDetails() {
         if(isSpouseAvailable) spouseLink->printChildrenDetails();
     }

@@ -42,8 +42,11 @@ class Spouse {
         auto *newChild = new Child;
         newChild->setAge(age);
         newChild->setName(name);
-        newChild->nextChild = childHead;
-        childHead = newChild;
+        if(!childHead) childHead = newChild;
+        else {
+            newChild->nextChild = childHead;
+            childHead = newChild;
+        }
     }
 
 public:
@@ -53,20 +56,12 @@ public:
         if (num_children <= 0) num_children = 0;
         else {
             childHead = nullptr;
-            childrenDetails(num_children);
+            childrenDetails();
         }
     }
 
     int getAge() {
         return age;
-    }
-
-    auto getChildHead() {
-        return childHead;
-    }
-
-    unsigned int get_child_num() {
-        return num_children;
     }
 
     void setAge(int &age) {
@@ -82,10 +77,10 @@ public:
     }
 
 
-    void childrenDetails(int lim_num_children) {
+    void childrenDetails() {
         int i = 1;
 
-        while (i <= lim_num_children) {
+        while (i <= num_children) {
             cout << "Enter the child " << i << " name->";
             string child_name;
             cin >> child_name;
@@ -101,13 +96,14 @@ public:
 
     void printChildrenDetails() {
         Child *temp = childHead;
-        int i = num_children;
-        while (temp) {
-            cout << "Child " << i << " name is " << temp->getName()
-                 << " and this child's age is " << temp->getAge() << endl;
-
-            temp = temp->nextChild;
-            i--;
+        int i = 1;
+        if(num_children > 0){
+            while (temp) {
+                cout << "Child " << i << " name is " << temp->getName()
+                     << " and this child's age is " << temp->getAge() << endl;
+                temp = temp->nextChild;
+                i++;
+            }
         }
     }
 
@@ -144,7 +140,7 @@ struct Employee {
 
 
     void printChildrenDetails() {
-        spouseLink->printChildrenDetails();
+        if(isSpouseAvailable) spouseLink->printChildrenDetails();
     }
 
 
@@ -180,8 +176,12 @@ struct List {
         newEmployee->employee_id = employee_id;
         newEmployee->age = age;
 
-        newEmployee->nextEmployee = head;
-        head = newEmployee;
+        if(!head) head = newEmployee;
+        else {
+            newEmployee->nextEmployee = head;
+            head = newEmployee;
+        }
+
     }
 
     void printAllEmpChildDetails() {
